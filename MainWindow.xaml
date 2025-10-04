@@ -7,6 +7,59 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Viewbox Grid.Row="0" Grid.Column="0">
+            
+        </Viewbox>
+        <Polyline Points="50,300,
+                  50,200,
+                  100,200,
+                  100,300,
+                  150,300,
+                  150,150,
+                  200,150,
+                  200,300,
+                  250,300,
+                  250,100,
+                  300,100,
+                  300,350"
+                  Stroke="Brown">
+            <Polyline.Fill>
+                <LinearGradientBrush>
+                    <GradientStop Color="Yellow" Offset="0.0" />
+                    <GradientStop Color="Red" Offset="0.2" />
+                    <GradientStop Color="Blue" Offset="0.7" />
+                    <GradientStop Color="LightGreen" Offset="1.0" />
+                </LinearGradientBrush>
+            </Polyline.Fill>
+        </Polyline>
+
+        <Polyline Points="10, 150,
+                  20, 50,
+                  40, 150"
+                  StrokeThickness="7"
+                  StrokeStartLineCap="Square"
+                  StrokeEndLineCap="Triangle"
+                  StrokeLineJoin="Miter"
+                  StrokeDashArray="1,4,2.5,1">
+            <Polyline.Stroke>
+                <LinearGradientBrush>
+                    <GradientStop Color="DarkBlue" Offset="0.0" />
+                </LinearGradientBrush>
+            </Polyline.Stroke>
+        </Polyline>
+
+        <Canvas Grid.Row="0" Grid.Column="1" Margin="10" Width="310" Height="310">
+            <Line Stroke="Black" StrokeThickness="5" X1="0" Y1="0" X2="0" Y2="300" />
+            <Line Stroke="Black" StrokeThickness="5" X1="0" Y1="300" X2="300" Y2="300" />
+            <Polyline Stroke="DarkBlue" StrokeThickness="3" Points="10,250 20,100 50,250 100,50
+                            200,100 300,100" />
+            <Ellipse Width="50" Height="30" Fill="Red" Canvas.Top="40" Canvas.Left="75" Opacity="0.4"
+/>
+        </Canvas>
 
     </Grid>
 </Window>
