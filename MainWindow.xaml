@@ -5,61 +5,166 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_04._10"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Переключатели" Height="400" Width="600">
+
+    <Window.Resources>
+        <Style TargetType="Grid" x:Key="SwitchStyle">
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <RotateTransform/>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation To="1.2" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX" Duration="0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation To="1.2" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" Duration="0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation To="1" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX" Duration="0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation To="1" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" Duration="0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeftButtonDown">
+                    <BeginStoryboard HandoffBehavior="Compose">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[1].Angle" Duration="0:0:0.3" By="20"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Viewbox Grid.Row="0" Grid.Column="0">
-            
+
+        <!--1 переключатель -->
+        <Viewbox Grid.Column="0" >
+            <Grid RenderTransformOrigin="0.5,0.5"  Style="{StaticResource SwitchStyle}">
+                <Polygon Name="Polygon1"
+                         Points="70,180 100,160 130,180 130,210 100,230 70,210"
+                         Stroke="Gray"
+                         StrokeThickness="2">
+                    <Polygon.Fill>
+                        <RadialGradientBrush GradientOrigin="0.5,0.5" Opacity="1">
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="LightGray" Offset="1" />
+                        </RadialGradientBrush>
+                    </Polygon.Fill>
+                </Polygon>
+
+                <Ellipse Width="25" Height="25"
+                         Fill="#FFAFAFAF"
+                         Stroke="Gray"
+                         StrokeThickness="1"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center" />
+
+                <Rectangle Width="40" Height="10"
+                           Fill="LightGreen"
+                           Stroke="Green"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+
+                <Rectangle Width="6" Height="2"
+                           Fill="Brown" Margin="81,191,113,191" />
+            </Grid>
         </Viewbox>
-        <Polyline Points="50,300,
-                  50,200,
-                  100,200,
-                  100,300,
-                  150,300,
-                  150,150,
-                  200,150,
-                  200,300,
-                  250,300,
-                  250,100,
-                  300,100,
-                  300,350"
-                  Stroke="Brown">
-            <Polyline.Fill>
-                <LinearGradientBrush>
-                    <GradientStop Color="Yellow" Offset="0.0" />
-                    <GradientStop Color="Red" Offset="0.2" />
-                    <GradientStop Color="Blue" Offset="0.7" />
-                    <GradientStop Color="LightGreen" Offset="1.0" />
-                </LinearGradientBrush>
-            </Polyline.Fill>
-        </Polyline>
 
-        <Polyline Points="10, 150,
-                  20, 50,
-                  40, 150"
-                  StrokeThickness="7"
-                  StrokeStartLineCap="Square"
-                  StrokeEndLineCap="Triangle"
-                  StrokeLineJoin="Miter"
-                  StrokeDashArray="1,4,2.5,1">
-            <Polyline.Stroke>
-                <LinearGradientBrush>
-                    <GradientStop Color="DarkBlue" Offset="0.0" />
-                </LinearGradientBrush>
-            </Polyline.Stroke>
-        </Polyline>
+        <!--2 переключатель -->
+        <Viewbox Grid.Column="1" >
+            <Grid RenderTransformOrigin="0.5,0.5" Style="{StaticResource SwitchStyle}">
+                <Polygon Name="Polygon2"
+                         Points="70,180 100,160 130,180 130,210 100,230 70,210"
+                         Stroke="Gray"
+                         StrokeThickness="2">
+                    <Polygon.Fill>
+                        <RadialGradientBrush GradientOrigin="0.5,0.5">
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="LightGray" Offset="1" />
+                        </RadialGradientBrush>
+                    </Polygon.Fill>
+                    <Polygon.RenderTransform>
+                        <RotateTransform x:Name="RotateTransform2" CenterX="100" CenterY="195"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
 
-        <Canvas Grid.Row="0" Grid.Column="1" Margin="10" Width="310" Height="310">
-            <Line Stroke="Black" StrokeThickness="5" X1="0" Y1="0" X2="0" Y2="300" />
-            <Line Stroke="Black" StrokeThickness="5" X1="0" Y1="300" X2="300" Y2="300" />
-            <Polyline Stroke="DarkBlue" StrokeThickness="3" Points="10,250 20,100 50,250 100,50
-                            200,100 300,100" />
-            <Ellipse Width="50" Height="30" Fill="Red" Canvas.Top="40" Canvas.Left="75" Opacity="0.4"
-/>
-        </Canvas>
+                <Ellipse Width="25" Height="25"
+                         Fill="#FFAFAFAF"
+                         Stroke="Gray"
+                         StrokeThickness="1"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center" />
 
+                <Rectangle Width="40" Height="10"
+                           Fill="LightGreen"
+                           Stroke="Green"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+
+                <Rectangle Width="6" Height="2"
+                           Fill="Brown" Margin="81,191,113,191" />
+            </Grid>
+        </Viewbox>
+
+        <!--3 переключатель -->
+        <Viewbox Grid.Column="2">
+            <Grid RenderTransformOrigin="0.5,0.5" Style="{StaticResource SwitchStyle}">
+                <Polygon Name="Polygon3"
+                         Points="70,180 100,160 130,180 130,210 100,230 70,210"
+                         Stroke="Gray"
+                         StrokeThickness="2">
+                    <Polygon.Fill>
+                        <RadialGradientBrush GradientOrigin="0.5,0.5">
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="LightGray" Offset="1" />
+                        </RadialGradientBrush>
+                    </Polygon.Fill>
+                    <Polygon.RenderTransform>
+                        <RotateTransform x:Name="RotateTransform3" CenterX="100" CenterY="195"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
+
+                <Ellipse Width="25" Height="25"
+                         Fill="#FFAFAFAF"
+                         Stroke="Gray"
+                         StrokeThickness="1"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center" />
+
+                <Rectangle Width="40" Height="10"
+                           Fill="LightGreen"
+                           Stroke="Green"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+
+                <Rectangle Width="6" Height="2"
+                           Fill="Brown" Margin="81,191,113,191" />
+            </Grid>
+        </Viewbox>
     </Grid>
 </Window>
